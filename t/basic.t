@@ -29,5 +29,5 @@ use Math::Quaternion;
     is $q.perl, 'Math::Quaternion.new(3, 4, 5, 6)',  'Full Quat: .perl';
 }
 
-done_testing;
+done;
 # vim: ft=perl6

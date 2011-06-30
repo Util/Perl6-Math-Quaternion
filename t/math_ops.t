@@ -36,6 +36,6 @@ ok $q1 !eqv $q2,                               '!eqv';
 is_q $q * $q.conj, [ 30, 0, 0, 0 ], 'Mult by conjugate';
 is_q $q.conj * $q, [ 30, 0, 0, 0 ], 'Mult    conjugate';
 
-done_testing;
+done;
 
 # vim: ft=perl6

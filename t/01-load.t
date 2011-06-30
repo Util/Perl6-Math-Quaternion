@@ -6,5 +6,5 @@ use Math::Quaternion;
 
 isa_ok Math::Quaternion.new(), Math::Quaternion;
 
-done_testing;
+done;
 # vim: ft=perl6
