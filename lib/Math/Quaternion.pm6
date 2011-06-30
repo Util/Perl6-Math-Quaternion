@@ -1,6 +1,7 @@
 use v6;
 
 class Math::Quaternion;
+does Numeric;
 
 has Num $.r; # Real portion
 has Num $.i; # First  complex part
