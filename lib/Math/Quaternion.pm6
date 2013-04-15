@@ -1,23 +1,22 @@
 use v6;
 
-class Math::Quaternion;
-does Numeric;
+class Math::Quaternion does Numeric;
 
-has Num $.r; # Real portion
-has Num $.i; # First  complex part
-has Num $.j; # Second complex part
-has Num $.k; # Third  complex part
+has Numeric $.r; # Real portion
+has Numeric $.i; # First  complex part
+has Numeric $.j; # Second complex part
+has Numeric $.k; # Third  complex part
 
 # Constructors: .new, .unit
 
 multi method new ( ) {
-    self.bless: *, :r(0), :i(0), :j(0), :k(0);
+    Math::Quaternion.bless(*, :r(0), :i(0), :j(0), :k(0));
 }
 multi method new ( Real $r ) {
-    self.bless: *, :r($r), :i(0), :j(0), :k(0);
+    Math::Quaternion.bless(*, :$r, :i(0), :j(0), :k(0));
 }
 multi method new ( Real $r, Real $i, Real $j, Real $k ) {
-    self.bless: *, :$r, :$i, :$j, :$k;
+    Math::Quaternion.bless(*, :$r, :$i, :$j, :$k);
 }
 
 method unit ( ) {
