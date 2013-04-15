@@ -3,7 +3,7 @@ use Test;
 use Math::Quaternion;
 
 sub is_q ( Math::Quaternion $got, @expected, $reason = '' ) {
-    is_deeply( [$got.reals], @expected, :$reason );
+    is_deeply( [$got.reals], @expected, $reason );
 }
 
 my Math::Quaternion $q  .= new: 1, 2, 3, 4;
