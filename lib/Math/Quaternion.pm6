@@ -25,12 +25,8 @@ method unit ( ) {
 
 # Utility methods:
 
-method Str ( ) {
+method Str (Math::Quaternion:D:) {
     "$.r + {$.i}i + {$.j}j + {$.k}k";
-}
-
-method perl ( ) {
-    self.WHAT.perl ~ ".new($.r, $.i, $.j, $.k)";
 }
 
 method reals ( ) { ( $.r, $.i, $.j, $.k ) } # All 4 components, each as a Real
