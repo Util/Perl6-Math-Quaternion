@@ -40,6 +40,16 @@ method conj ( ) {
     self.new: $.r, -$.i, -$.j, -$.k;
 }
 
+# Cross product
+method cross ( $a : ::?CLASS $b ) {
+    my @a_rijk            = $a.reals;
+    my ( $r, $i, $j, $k ) = $b.reals;
+    return $a.new: ( [+] @a_rijk Z* $r, -$i, -$j, -$k ), # real
+                   ( [+] @a_rijk Z* $i,  $r,  $k, -$j ), # i
+                   ( [+] @a_rijk Z* $j, -$k,  $r,  $i ), # j
+                   ( [+] @a_rijk Z* $k,  $j, -$i,  $r ); # k
+}
+
 # Math operators:
 
 multi sub  infix:<eqv> ( ::?CLASS $a, ::?CLASS $b ) is export { [and] $a.reals Z== $b.reals }
@@ -52,13 +62,6 @@ multi sub  infix:<->   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.new: |( $a.re
 multi sub prefix:<->   ( ::?CLASS $a              ) is export { $a.new: |( $a.reals X* -1 ) }
 multi sub  infix:<*>   ( ::?CLASS $a,     Real $b ) is export { $a.new: |( $a.reals X* $b ) }
 multi sub  infix:<*>   (     Real $b, ::?CLASS $a ) is export { $a.new: |( $a.reals X* $b ) }
-multi sub  infix:<*>   ( ::?CLASS $a, ::?CLASS $b ) is export {
-    my @a_rijk            = $a.reals;
-    my ( $r, $i, $j, $k ) = $b.reals;
-    return $a.new: ( [+] @a_rijk Z* $r, -$i, -$j, -$k ), # real
-                   ( [+] @a_rijk Z* $i,  $r,  $k, -$j ), # i
-                   ( [+] @a_rijk Z* $j, -$k,  $r,  $i ), # j
-                   ( [+] @a_rijk Z* $k,  $j, -$i,  $r ); # k
-}
+multi sub  infix:<*>   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.cross($b) }
 
 # vim: ft=perl6
