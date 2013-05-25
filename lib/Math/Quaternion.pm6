@@ -33,7 +33,7 @@ method reals ( ) { ( $.r, $.i, $.j, $.k ) } # All 4 components, each as a Real
 
 # Math methods:
 
-method norm ( ) { sqrt [+] self.reals X** 2 }
+method norm ( ) { sqrt [+] self.reals »**» 2 }
 
 # Conjugate
 method conj ( ) {
@@ -49,24 +49,24 @@ method dot ( $a : ::?CLASS $b ) {
 method cross ( $a : ::?CLASS $b ) {
     my @a_rijk            = $a.reals;
     my ( $r, $i, $j, $k ) = $b.reals;
-    return $a.new: ( [+] @a_rijk Z* $r, -$i, -$j, -$k ), # real
-                   ( [+] @a_rijk Z* $i,  $r,  $k, -$j ), # i
-                   ( [+] @a_rijk Z* $j, -$k,  $r,  $i ), # j
-                   ( [+] @a_rijk Z* $k,  $j, -$i,  $r ); # k
+    return $a.new: ( [+] @a_rijk »*« ( $r, -$i, -$j, -$k ) ), # real
+                   ( [+] @a_rijk »*« ( $i,  $r,  $k, -$j ) ), # i
+                   ( [+] @a_rijk »*« ( $j, -$k,  $r,  $i ) ), # j
+                   ( [+] @a_rijk »*« ( $k,  $j, -$i,  $r ) ); # k
 }
 
 # Math operators:
 
-multi sub  infix:<eqv> ( ::?CLASS $a, ::?CLASS $b ) is export { [and] $a.reals Z== $b.reals }
+multi sub  infix:<eqv> ( ::?CLASS $a, ::?CLASS $b ) is export { [and] $a.reals »==« $b.reals }
 multi sub  infix:<+>   ( ::?CLASS $a,     Real $b ) is export { $a.new: $b+$a.r, $a.i, $a.j, $a.k }
 multi sub  infix:<+>   (     Real $b, ::?CLASS $a ) is export { $a.new: $b+$a.r, $a.i, $a.j, $a.k }
-multi sub  infix:<+>   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.new: |( $a.reals Z+ $b.reals ) }
+multi sub  infix:<+>   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.new: |( $a.reals »+« $b.reals ) }
 multi sub  infix:<->   ( ::?CLASS $a,     Real $b ) is export { $a.new: $a.r-$b, $a.i, $a.j, $a.k }
 multi sub  infix:<->   (     Real $b, ::?CLASS $a ) is export { $a.new: $b-$a.r,-$a.i,-$a.j,-$a.k }
-multi sub  infix:<->   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.new: |( $a.reals Z- $b.reals ) }
-multi sub prefix:<->   ( ::?CLASS $a              ) is export { $a.new: |( $a.reals X* -1 ) }
-multi sub  infix:<*>   ( ::?CLASS $a,     Real $b ) is export { $a.new: |( $a.reals X* $b ) }
-multi sub  infix:<*>   (     Real $b, ::?CLASS $a ) is export { $a.new: |( $a.reals X* $b ) }
+multi sub  infix:<->   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.new: |( $a.reals »-« $b.reals ) }
+multi sub prefix:<->   ( ::?CLASS $a              ) is export { $a.new: |( $a.reals »*» -1 ) }
+multi sub  infix:<*>   ( ::?CLASS $a,     Real $b ) is export { $a.new: |( $a.reals »*» $b ) }
+multi sub  infix:<*>   (     Real $b, ::?CLASS $a ) is export { $a.new: |( $a.reals »*» $b ) }
 multi sub  infix:<*>   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.cross($b) }
 multi sub  infix:<⋅>   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.dot($b) }
 
