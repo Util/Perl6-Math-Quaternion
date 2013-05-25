@@ -9,6 +9,7 @@ sub is_q ( Math::Quaternion $got, @expected, $reason = '' ) {
 my Math::Quaternion $q  .= new: 1, 2, 3, 4;
 my Math::Quaternion $q1 .= new: 2, 3, 4, 5;
 my Math::Quaternion $q2 .= new: 3, 4, 5, 6;
+my Math::Quaternion $qr .= new: 7, 0, 0, 0;
 my $r  = 7;
 
 is   $q.norm,   5.47722557505166,   '.norm';
@@ -33,6 +34,17 @@ is   $q2 ⋅ $q1, 68, 'Dot product - commutative';
 # Quaternions are eqv iff all 4 of their component Reals match each other.
 ok $q   eqv Math::Quaternion.new( |$q.reals ), ' eqv';
 ok $q1 !eqv $q2,                               '!eqv';
+
+ok !$q.is_real,  '$q  is not real';
+ok !$q1.is_real, '$q1 is not real';
+ok !$q2.is_real, '$q2 is not real';
+ok  $qr.is_real, '$qr is     real';
+
+is_deeply [$q.v ], [ 2, 3, 4 ], '$q  .v works';
+is_deeply [$q1.v], [ 3, 4, 5 ], '$q1 .v works';
+is_deeply [$q2.v], [ 4, 5, 6 ], '$q2 .v works';
+is_deeply [$qr.v], [ 0, 0, 0 ], '$qr .v works';
+
 
 # The product of an Quaternion with its conjugate is a non-negative real number.
 is_q $q * $q.conj, [ 30, 0, 0, 0 ], 'Mult by conjugate';

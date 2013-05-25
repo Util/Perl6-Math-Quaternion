@@ -30,6 +30,14 @@ method Str (::?CLASS:D:) {
 }
 
 method reals ( ) { ( $.r, $.i, $.j, $.k ) } # All 4 components, each as a Real
+method v     ( ) { (      $.i, $.j, $.k ) } # Like .reals, but omitting .r
+
+# Property methods:
+
+method is_real ( ) { 
+    [and] self.v »==» 0;
+}
+
 
 # Math methods:
 
