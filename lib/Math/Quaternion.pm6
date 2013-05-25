@@ -40,6 +40,11 @@ method conj ( ) {
     self.new: $.r, -$.i, -$.j, -$.k;
 }
 
+# Dot product
+method dot ( $a : ::?CLASS $b ) {
+    return [+] $a.reals »*« $b.reals;
+}
+
 # Cross product
 method cross ( $a : ::?CLASS $b ) {
     my @a_rijk            = $a.reals;
@@ -63,5 +68,6 @@ multi sub prefix:<->   ( ::?CLASS $a              ) is export { $a.new: |( $a.re
 multi sub  infix:<*>   ( ::?CLASS $a,     Real $b ) is export { $a.new: |( $a.reals X* $b ) }
 multi sub  infix:<*>   (     Real $b, ::?CLASS $a ) is export { $a.new: |( $a.reals X* $b ) }
 multi sub  infix:<*>   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.cross($b) }
+multi sub  infix:<⋅>   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.dot($b) }
 
 # vim: ft=perl6
