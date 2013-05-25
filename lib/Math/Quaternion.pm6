@@ -25,7 +25,7 @@ method unit ( ) {
 
 # Utility methods:
 
-method Str (Math::Quaternion:D:) {
+method Str (::?CLASS:D:) {
     "$.r + {$.i}i + {$.j}j + {$.k}k";
 }
 
@@ -42,17 +42,17 @@ method conj ( ) {
 
 # Math operators:
 
-multi sub  infix:<eqv> ( Math::Quaternion $a, Math::Quaternion $b ) is export { [and] $a.reals Z== $b.reals }
-multi sub  infix:<+>   ( Math::Quaternion $a,             Real $b ) is export { $a.new: $b+$a.r, $a.i, $a.j, $a.k }
-multi sub  infix:<+>   (             Real $b, Math::Quaternion $a ) is export { $a.new: $b+$a.r, $a.i, $a.j, $a.k }
-multi sub  infix:<+>   ( Math::Quaternion $a, Math::Quaternion $b ) is export { $a.new: |( $a.reals Z+ $b.reals ) }
-multi sub  infix:<->   ( Math::Quaternion $a,             Real $b ) is export { $a.new: $a.r-$b, $a.i, $a.j, $a.k }
-multi sub  infix:<->   (             Real $b, Math::Quaternion $a ) is export { $a.new: $b-$a.r,-$a.i,-$a.j,-$a.k }
-multi sub  infix:<->   ( Math::Quaternion $a, Math::Quaternion $b ) is export { $a.new: |( $a.reals Z- $b.reals ) }
-multi sub prefix:<->   ( Math::Quaternion $a                      ) is export { $a.new: |( $a.reals X* -1 ) }
-multi sub  infix:<*>   ( Math::Quaternion $a,             Real $b ) is export { $a.new: |( $a.reals X* $b ) }
-multi sub  infix:<*>   (             Real $b, Math::Quaternion $a ) is export { $a.new: |( $a.reals X* $b ) }
-multi sub  infix:<*>   ( Math::Quaternion $a, Math::Quaternion $b ) is export {
+multi sub  infix:<eqv> ( ::?CLASS $a, ::?CLASS $b ) is export { [and] $a.reals Z== $b.reals }
+multi sub  infix:<+>   ( ::?CLASS $a,     Real $b ) is export { $a.new: $b+$a.r, $a.i, $a.j, $a.k }
+multi sub  infix:<+>   (     Real $b, ::?CLASS $a ) is export { $a.new: $b+$a.r, $a.i, $a.j, $a.k }
+multi sub  infix:<+>   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.new: |( $a.reals Z+ $b.reals ) }
+multi sub  infix:<->   ( ::?CLASS $a,     Real $b ) is export { $a.new: $a.r-$b, $a.i, $a.j, $a.k }
+multi sub  infix:<->   (     Real $b, ::?CLASS $a ) is export { $a.new: $b-$a.r,-$a.i,-$a.j,-$a.k }
+multi sub  infix:<->   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.new: |( $a.reals Z- $b.reals ) }
+multi sub prefix:<->   ( ::?CLASS $a              ) is export { $a.new: |( $a.reals X* -1 ) }
+multi sub  infix:<*>   ( ::?CLASS $a,     Real $b ) is export { $a.new: |( $a.reals X* $b ) }
+multi sub  infix:<*>   (     Real $b, ::?CLASS $a ) is export { $a.new: |( $a.reals X* $b ) }
+multi sub  infix:<*>   ( ::?CLASS $a, ::?CLASS $b ) is export {
     my @a_rijk            = $a.reals;
     my ( $r, $i, $j, $k ) = $b.reals;
     return $a.new: ( [+] @a_rijk Z* $r, -$i, -$j, -$k ), # real
