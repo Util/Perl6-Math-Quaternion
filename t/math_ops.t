@@ -27,6 +27,9 @@ is_q $r  * $q,  [  7, 14, 21, 28 ], 'Mult     Real';
 is_q $q1 * $q2, [-56, 16, 24, 26 ], 'Mult by  Quat';
 is_q $q2 * $q1, [-56, 18, 20, 28 ], 'Mult     Quat - non commutative';
 
+is   $q1 ⋅ $q2, 68, 'Dot product';
+is   $q2 ⋅ $q1, 68, 'Dot product - commutative';
+
 # Quaternions are eqv iff all 4 of their component Reals match each other.
 ok $q   eqv Math::Quaternion.new( |$q.reals ), ' eqv';
 ok $q1 !eqv $q2,                               '!eqv';
