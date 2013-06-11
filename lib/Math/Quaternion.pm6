@@ -15,6 +15,9 @@ multi method new ( ) {
 multi method new ( Real $r ) {
     self.bless(*, :$r, :i(0), :j(0), :k(0));
 }
+multi method new ( Complex $c ) {
+    self.bless(*, :r($c.re), :i($c.im), :j(0), :k(0));
+}
 multi method new ( Real $r, Real $i, Real $j, Real $k ) {
     self.bless(*, :$r, :$i, :$j, :$k);
 }
