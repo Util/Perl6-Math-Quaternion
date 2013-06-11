@@ -10,13 +10,13 @@ has Numeric $.k; # Third  complex part
 # Constructors: .new, .unit
 
 multi method new ( ) {
-    Math::Quaternion.bless(*, :r(0), :i(0), :j(0), :k(0));
+    self.bless(*, :r(0), :i(0), :j(0), :k(0));
 }
 multi method new ( Real $r ) {
-    Math::Quaternion.bless(*, :$r, :i(0), :j(0), :k(0));
+    self.bless(*, :$r, :i(0), :j(0), :k(0));
 }
 multi method new ( Real $r, Real $i, Real $j, Real $k ) {
-    Math::Quaternion.bless(*, :$r, :$i, :$j, :$k);
+    self.bless(*, :$r, :$i, :$j, :$k);
 }
 
 method unit ( ) {
