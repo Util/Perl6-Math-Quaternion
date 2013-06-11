@@ -1,5 +1,6 @@
 use v6;
 use Test;
+plan *;
 use Math::Quaternion;
 
 sub is_q ( Math::Quaternion $got, @expected, $reason = '' ) {
