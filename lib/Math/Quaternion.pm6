@@ -40,6 +40,9 @@ method v     ( ) { (      $.i, $.j, $.k ) } # Like .coeff, but omitting .r
 method is_real ( ) { 
     [and] self.v »==» 0;
 }
+method is_complex ( ) { 
+    all( $.j, $.k ) == 0;
+}
 
 
 # Math methods:
@@ -71,14 +74,22 @@ method cross ( $a : ::?CLASS $b ) {
 multi sub  infix:<eqv> ( ::?CLASS $a, ::?CLASS $b ) is export { [and] $a.coeff »==« $b.coeff }
 multi sub  infix:<+>   ( ::?CLASS $a,     Real $b ) is export { $a.new: $b+$a.r, $a.i, $a.j, $a.k }
 multi sub  infix:<+>   (     Real $b, ::?CLASS $a ) is export { $a.new: $b+$a.r, $a.i, $a.j, $a.k }
+multi sub  infix:<+>   ( ::?CLASS $a,  Complex $b ) is export { $a.new: $b.re+$a.r, $b.im+$a.i, $a.j, $a.k }
+multi sub  infix:<+>   (  Complex $b, ::?CLASS $a ) is export { $a.new: $b.re+$a.r, $b.im+$a.i, $a.j, $a.k }
 multi sub  infix:<+>   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.new: |( $a.coeff »+« $b.coeff ) }
 multi sub  infix:<->   ( ::?CLASS $a,     Real $b ) is export { $a.new: $a.r-$b, $a.i, $a.j, $a.k }
 multi sub  infix:<->   (     Real $b, ::?CLASS $a ) is export { $a.new: $b-$a.r,-$a.i,-$a.j,-$a.k }
+multi sub  infix:<->   ( ::?CLASS $a,  Complex $b ) is export { $a.new: $a.r-$b.re, $a.i-$b.im,  $a.j,  $a.k }
+multi sub  infix:<->   (  Complex $b, ::?CLASS $a ) is export { $a.new: $b.re-$a.r, $b.im-$a.i, -$a.j, -$a.k }
 multi sub  infix:<->   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.new: |( $a.coeff »-« $b.coeff ) }
 multi sub prefix:<->   ( ::?CLASS $a              ) is export { $a.new: |( $a.coeff »*» -1 ) }
 multi sub  infix:<*>   ( ::?CLASS $a,     Real $b ) is export { $a.new: |( $a.coeff »*» $b ) }
 multi sub  infix:<*>   (     Real $b, ::?CLASS $a ) is export { $a.new: |( $a.coeff »*» $b ) }
+multi sub  infix:<*>   ( ::?CLASS $a,  Complex $b ) is export { $a.cross( $a.new($b) ) }
+multi sub  infix:<*>   (  Complex $b, ::?CLASS $a ) is export {           $a.new($b).cross($a) }
 multi sub  infix:<*>   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.cross($b) }
+multi sub  infix:<⋅>   ( ::?CLASS $a,  Complex $b ) is export { $a.dot($a.new: $b) }
+multi sub  infix:<⋅>   (  Complex $b, ::?CLASS $a ) is export { $a.dot($a.new: $b) }
 multi sub  infix:<⋅>   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.dot($b) }
 
 # vim: ft=perl6
