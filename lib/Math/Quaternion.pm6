@@ -82,7 +82,7 @@ multi sub  infix:<->   (     Real $b, ::?CLASS $a ) is export { $a.new: $b-$a.r,
 multi sub  infix:<->   ( ::?CLASS $a,  Complex $b ) is export { $a.new: $a.r-$b.re, $a.i-$b.im,  $a.j,  $a.k }
 multi sub  infix:<->   (  Complex $b, ::?CLASS $a ) is export { $a.new: $b.re-$a.r, $b.im-$a.i, -$a.j, -$a.k }
 multi sub  infix:<->   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.new: |( $a.coeff »-« $b.coeff ) }
-multi sub prefix:<->   ( ::?CLASS $a              ) is export { $a.new: |( $a.coeff »*» -1 ) }
+multi sub prefix:<->   ( ::?CLASS $a              ) is export { $a.new: |(-« $a.coeff ) }
 multi sub  infix:<*>   ( ::?CLASS $a,     Real $b ) is export { $a.new: |( $a.coeff »*» $b ) }
 multi sub  infix:<*>   (     Real $b, ::?CLASS $a ) is export { $a.new: |( $a.coeff »*» $b ) }
 multi sub  infix:<*>   ( ::?CLASS $a,  Complex $b ) is export { $a.cross( $a.new($b) ) }
