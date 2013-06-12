@@ -19,6 +19,10 @@ ACKNOWLEDGEMENTS
     Thanks to:
         * Jonathan Chin for the original Perl 5 Math::Quaternion.
         * Solomon "colomon" Foster for encouraging this module's release.
+        * Will "Coke" Coleda for fixes to match changes in Rakudo and in the
+          Perl 6 specs.
+        * RosettaCode for the challenge that provoked the initial code:
+            http://rosettacode.org/wiki/Quaternion_type#Perl_6
 
 SEE ALSO
     http://en.wikipedia.org/wiki/Quaternion
