@@ -37,10 +37,10 @@ method v     ( ) { (      $.i, $.j, $.k ) } # Like .coeff, but omitting .r
 
 # Property methods:
 
-method is_real ( ) { 
+method is_real ( ) {
     [and] self.v »==» 0;
 }
-method is_complex ( ) { 
+method is_complex ( ) {
     all( $.j, $.k ) == 0;
 }
 
