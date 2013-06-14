@@ -4,9 +4,9 @@ plan *;
 use Math::Quaternion;
 
 sub is_q ( Math::Quaternion $got, @expected, $reason = '' ) {
-    # Complex always have real coefficients, so we use +0e0 to force
-    # conversion to real.
-    is_deeply( [$got.coeff »+» 0e0], [@expected »+» 0e0], $reason );
+    # Complex always have real coefficients, so we use .Num to force
+    # conversion when @expected might contain Ints.
+    is_deeply( [$got.coeff».Num], [@expected».Num], $reason );
 }
 
 my          Complex $c   = 8+9i;
