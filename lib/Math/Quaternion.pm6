@@ -2,10 +2,8 @@ use v6;
 
 class Math::Quaternion does Numeric;
 
-has Numeric $.r; # Real portion
-has Numeric $.i; # First  imaginary part
-has Numeric $.j; # Second imaginary part
-has Numeric $.k; # Third  imaginary part
+# One real part (r), and three imaginary parts (i,j,k).
+has Numeric ( $.r, $.i, $.j, $.k );
 
 # Constructors: .new, .unit
 
