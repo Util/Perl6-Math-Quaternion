@@ -3,9 +3,9 @@ use v6;
 class Math::Quaternion does Numeric;
 
 has Numeric $.r; # Real portion
-has Numeric $.i; # First  complex part
-has Numeric $.j; # Second complex part
-has Numeric $.k; # Third  complex part
+has Numeric $.i; # First  imaginary part
+has Numeric $.j; # Second imaginary part
+has Numeric $.k; # Third  imaginary part
 
 # Constructors: .new, .unit
 
