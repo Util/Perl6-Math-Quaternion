@@ -41,6 +41,9 @@ method is_real ( ) {
 method is_complex ( ) {
     all( $.j, $.k ) == 0;
 }
+method is_zero ( ) {
+    all( $.r, $.i, $.j, $.k ) == 0;
+}
 
 
 # Math methods:
