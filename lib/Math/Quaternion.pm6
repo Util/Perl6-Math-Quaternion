@@ -35,18 +35,16 @@ method v     ( ) { (      $.i, $.j, $.k ) } # Like .coeff, but omitting .r
 
 # Property methods:
 
-method is_real ( ) {
-    all( $.i, $.j, $.k ) == 0;
-}
-method is_complex ( ) {
-    all( $.j, $.k ) == 0;
-}
-method is_zero ( ) {
-    all( $.r, $.i, $.j, $.k ) == 0;
-}
-method is_imaginary ( ) {
-    $.r == 0;
-}
+# Following the example of p5 M::Q isreal(), our
+# .is_real will return true when .is_zero is true. By extension,
+# .is_complex       is true when .is_real is true,
+# .is_complex       is true when .is_zero is true, and
+# .is_imaginary     is true when .is_zero is true.
+
+method is_real      ( ) { all(      $.i, $.j, $.k ) == 0 }
+method is_complex   ( ) { all(           $.j, $.k ) == 0 }
+method is_zero      ( ) { all( $.r, $.i, $.j, $.k ) == 0 }
+method is_imaginary ( ) {      $.r                  == 0 }
 
 
 # Math methods:
