@@ -36,7 +36,7 @@ method v     ( ) { (      $.i, $.j, $.k ) } # Like .coeff, but omitting .r
 # Property methods:
 
 method is_real ( ) {
-    [and] self.v »==» 0;
+    all( $.i, $.j, $.k ) == 0;
 }
 method is_complex ( ) {
     all( $.j, $.k ) == 0;
