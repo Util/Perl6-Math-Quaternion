@@ -8,9 +8,9 @@ sub is_q ( Math::Quaternion $got, @expected, $reason = '' ) {
 }
 
 my $r  = 7;
-my Math::Quaternion $q  .= new: 1, 2, 3, 4;
-my Math::Quaternion $q1 .= new: 2, 3, 4, 5;
-my Math::Quaternion $q2 .= new: 3, 4, 5, 6;
+my Math::Quaternion $q  .= new:  1, 2, 3, 4;
+my Math::Quaternion $q1 .= new:  2, 3, 4, 5;
+my Math::Quaternion $q2 .= new:  3, 4, 5, 6;
 my Math::Quaternion $qr .= new: $r, 0, 0, 0;
 
 is   $q.norm,   5.47722557505166,   '.norm';
