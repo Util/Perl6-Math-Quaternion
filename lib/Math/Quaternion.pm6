@@ -44,6 +44,9 @@ method is_complex ( ) {
 method is_zero ( ) {
     all( $.r, $.i, $.j, $.k ) == 0;
 }
+method is_imaginary ( ) {
+    $.r == 0;
+}
 
 
 # Math methods:
