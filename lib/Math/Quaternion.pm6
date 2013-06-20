@@ -75,6 +75,11 @@ my sub sum-of-squares ( *@list ) {
     return [+] ( @list »*« @list );
 }
 
+# Dot product of self with self
+method squarednorm ( ) {
+    return sum-of-squares( self.coeff );
+}
+
 # Math operators:
 
 multi sub  infix:<eqv> ( ::?CLASS $a, ::?CLASS $b ) is export { [and] $a.coeff »==« $b.coeff }
