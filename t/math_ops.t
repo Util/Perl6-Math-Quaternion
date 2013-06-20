@@ -3,8 +3,11 @@ use Test;
 plan *;
 use Math::Quaternion;
 
-sub is_q ( Math::Quaternion $got, @expected, $reason = '' ) {
+multi sub is_q ( Math::Quaternion $got, @expected, $reason = '' ) {
     is_deeply( [$got.coeffs], @expected, $reason );
+}
+multi sub is_q ( Math::Quaternion $got, Math::Quaternion $expected, $reason = '' ) {
+    is_deeply( [$got.coeffs], [$expected.coeffs], $reason );
 }
 
 my $r  = 7;
