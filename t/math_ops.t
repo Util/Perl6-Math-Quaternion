@@ -54,5 +54,27 @@ is_deeply [$qr.v], [ 0, 0, 0 ], '$qr .v works';
 is_q $q * $q.conj, [ 30, 0, 0, 0 ], 'Mult by conjugate';
 is_q $q.conj * $q, [ 30, 0, 0, 0 ], 'Mult    conjugate';
 
+my sub four_quats ( $n ) {
+    return  Math::Quaternion.new( $n,  0,  0,  0 ),
+            Math::Quaternion.new(  0, $n,  0,  0 ),
+            Math::Quaternion.new(  0,  0, $n,  0 ),
+            Math::Quaternion.new(  0,  0,  0, $n );
+}
+{
+    my ( $r, $i, $j, $k ) = four_quats(1);
+
+    # http://en.wikipedia.org/wiki/Quaternion#Multiplication_of_basis_elements
+    is_q $r * $r,   $r, '1 * 1 =  1';
+    is_q $i * $i,  -$r, 'i * i = -1';
+    is_q $j * $j,  -$r, 'j * j = -1';
+    is_q $k * $k,  -$r, 'k * k = -1';
+    is_q $i * $j,   $k, 'i * j =  k';
+    is_q $j * $i,  -$k, 'j * i = -k';
+    is_q $j * $k,   $i, 'j * k =  i';
+    is_q $k * $j,  -$i, 'k * j = -i';
+    is_q $k * $i,   $j, 'k * i =  j';
+    is_q $i * $k,  -$j, 'i * k = -j';
+}
+
 done;
 # vim: ft=perl6
