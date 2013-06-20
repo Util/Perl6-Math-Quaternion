@@ -15,13 +15,13 @@ my Math::Quaternion $qi .= new:  0, 2, 3, 4;
 my Math::Quaternion $qu .= unit;
 my Math::Quaternion $qU  = $q1 * ( 1 / $q1.squarednorm.sqrt ); # XXX Change to .norm or .normalize(d) when available.
 
-my @test_pairs = 
+my @test_pairs =
     zero      => { $^a.is_zero },
     real      => { $^a.is_real },
     complex   => { $^a.is_complex },
     imaginary => { $^a.is_imaginary },
 ;
-my @data = 
+my @data =
     # z  r  c  i
     [ 0, 0, 0, 0, :$q1 ],
     [ 0, 1, 1, 0, :$qr ],
