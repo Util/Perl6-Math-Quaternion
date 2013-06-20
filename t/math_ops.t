@@ -55,5 +55,4 @@ is_q $q * $q.conj, [ 30, 0, 0, 0 ], 'Mult by conjugate';
 is_q $q.conj * $q, [ 30, 0, 0, 0 ], 'Mult    conjugate';
 
 done;
-
 # vim: ft=perl6
