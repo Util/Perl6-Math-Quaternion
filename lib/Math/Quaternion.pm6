@@ -71,6 +71,10 @@ method cross ( $a : ::?CLASS $b ) {
                    ( [+] @a_rijk »*« ( $k,  $j, -$i,  $r ) ); # k
 }
 
+my sub sum-of-squares ( *@list ) {
+    return [+] ( @list »*« @list );
+}
+
 # Math operators:
 
 multi sub  infix:<eqv> ( ::?CLASS $a, ::?CLASS $b ) is export { [and] $a.coeff »==« $b.coeff }
