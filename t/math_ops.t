@@ -4,7 +4,7 @@ plan *;
 use Math::Quaternion;
 
 sub is_q ( Math::Quaternion $got, @expected, $reason = '' ) {
-    is_deeply( [$got.coeff], @expected, $reason );
+    is_deeply( [$got.coeffs], @expected, $reason );
 }
 
 my $r  = 7;
@@ -32,9 +32,9 @@ is_q $q2 * $q1, [-56, 18, 20, 28 ], 'Mult     Quat - non commutative';
 is   $q1 ⋅ $q2, 68, 'Dot product';
 is   $q2 ⋅ $q1, 68, 'Dot product - commutative';
 
-# Quaternions are eqv iff all 4 of their component coeff match each other.
-ok $q   eqv Math::Quaternion.new( |$q.coeff ), ' eqv';
-ok $q1 !eqv $q2,                               '!eqv';
+# Quaternions are eqv iff all 4 of their component coeffs match each other.
+ok $q   eqv Math::Quaternion.new( |$q.coeffs ), ' eqv';
+ok $q1 !eqv $q2,                                '!eqv';
 
 ok !$q.is_real,  '$q  is not real';
 ok !$q1.is_real, '$q1 is not real';

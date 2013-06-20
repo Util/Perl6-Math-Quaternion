@@ -30,8 +30,8 @@ method Str (::?CLASS:D:) {
     "$.r + {$.i}i + {$.j}j + {$.k}k";
 }
 
-method coeff ( ) { ( $.r, $.i, $.j, $.k ) } # All 4 components as a list.
-method v     ( ) { (      $.i, $.j, $.k ) } # Like .coeff, but omitting .r
+method coeffs ( ) { ( $.r, $.i, $.j, $.k ) } # All 4 components as a list.
+method v      ( ) { (      $.i, $.j, $.k ) } # Like .coeffs, but omitting .r
 
 # Property methods:
 
@@ -49,7 +49,7 @@ method is_imaginary ( ) {      $.r                  == 0 }
 
 # Math methods:
 
-method norm ( ) { sqrt [+] self.coeff »**» 2 }
+method norm ( ) { sqrt [+] self.coeffs »**» 2 }
 
 # Conjugate
 method conj ( ) {
@@ -58,13 +58,13 @@ method conj ( ) {
 
 # Dot product
 method dot ( $a : ::?CLASS $b ) {
-    return [+] $a.coeff »*« $b.coeff;
+    return [+] $a.coeffs »*« $b.coeffs;
 }
 
 # Cross product
 method cross ( $a : ::?CLASS $b ) {
-    my @a_rijk            = $a.coeff;
-    my ( $r, $i, $j, $k ) = $b.coeff;
+    my @a_rijk            = $a.coeffs;
+    my ( $r, $i, $j, $k ) = $b.coeffs;
     return $a.new: ( [+] @a_rijk »*« ( $r, -$i, -$j, -$k ) ), # real
                    ( [+] @a_rijk »*« ( $i,  $r,  $k, -$j ) ), # i
                    ( [+] @a_rijk »*« ( $j, -$k,  $r,  $i ) ), # j
@@ -77,25 +77,25 @@ my sub sum-of-squares ( *@list ) {
 
 # Dot product of self with self
 method squarednorm ( ) {
-    return sum-of-squares( self.coeff );
+    return sum-of-squares( self.coeffs );
 }
 
 # Math operators:
 
-multi sub  infix:<eqv> ( ::?CLASS $a, ::?CLASS $b ) is export { [and] $a.coeff »==« $b.coeff }
+multi sub  infix:<eqv> ( ::?CLASS $a, ::?CLASS $b ) is export { [and] $a.coeffs »==« $b.coeffs }
 multi sub  infix:<+>   ( ::?CLASS $a,     Real $b ) is export { $a.new: $b+$a.r, $a.i, $a.j, $a.k }
 multi sub  infix:<+>   (     Real $b, ::?CLASS $a ) is export { $a.new: $b+$a.r, $a.i, $a.j, $a.k }
 multi sub  infix:<+>   ( ::?CLASS $a,  Complex $b ) is export { $a.new: $b.re+$a.r, $b.im+$a.i, $a.j, $a.k }
 multi sub  infix:<+>   (  Complex $b, ::?CLASS $a ) is export { $a.new: $b.re+$a.r, $b.im+$a.i, $a.j, $a.k }
-multi sub  infix:<+>   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.new: |( $a.coeff »+« $b.coeff ) }
+multi sub  infix:<+>   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.new: |( $a.coeffs »+« $b.coeffs ) }
 multi sub  infix:<->   ( ::?CLASS $a,     Real $b ) is export { $a.new: $a.r-$b, $a.i, $a.j, $a.k }
 multi sub  infix:<->   (     Real $b, ::?CLASS $a ) is export { $a.new: $b-$a.r,-$a.i,-$a.j,-$a.k }
 multi sub  infix:<->   ( ::?CLASS $a,  Complex $b ) is export { $a.new: $a.r-$b.re, $a.i-$b.im,  $a.j,  $a.k }
 multi sub  infix:<->   (  Complex $b, ::?CLASS $a ) is export { $a.new: $b.re-$a.r, $b.im-$a.i, -$a.j, -$a.k }
-multi sub  infix:<->   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.new: |( $a.coeff »-« $b.coeff ) }
-multi sub prefix:<->   ( ::?CLASS $a              ) is export { $a.new: |(-« $a.coeff ) }
-multi sub  infix:<*>   ( ::?CLASS $a,     Real $b ) is export { $a.new: |( $a.coeff »*» $b ) }
-multi sub  infix:<*>   (     Real $b, ::?CLASS $a ) is export { $a.new: |( $a.coeff »*» $b ) }
+multi sub  infix:<->   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.new: |( $a.coeffs »-« $b.coeffs ) }
+multi sub prefix:<->   ( ::?CLASS $a              ) is export { $a.new: |(-« $a.coeffs ) }
+multi sub  infix:<*>   ( ::?CLASS $a,     Real $b ) is export { $a.new: |( $a.coeffs »*» $b ) }
+multi sub  infix:<*>   (     Real $b, ::?CLASS $a ) is export { $a.new: |( $a.coeffs »*» $b ) }
 multi sub  infix:<*>   ( ::?CLASS $a,  Complex $b ) is export { $a.cross( $a.new($b) ) }
 multi sub  infix:<*>   (  Complex $b, ::?CLASS $a ) is export {           $a.new($b).cross($a) }
 multi sub  infix:<*>   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.cross($b) }

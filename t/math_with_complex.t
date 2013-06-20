@@ -6,7 +6,7 @@ use Math::Quaternion;
 sub is_q ( Math::Quaternion $got, @expected, $reason = '' ) {
     # Complex always have real coefficients, so we use .Num to force
     # conversion when @expected might contain Ints.
-    is_deeply( [$got.coeff».Num], [@expected».Num], $reason );
+    is_deeply( [$got.coeffs».Num], [@expected».Num], $reason );
 }
 
 my          Complex $c   = 8+9i;
