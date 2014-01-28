@@ -5,5 +5,8 @@
     "depends"     : [],
     "author"      : "Bruce Gray",
     "authority"   : "cpan+BGRAY",
+    "provides"    : {
+        "Math::Quaternion" : "lib/Math/Quaternion.pm6"
+    },
     "source-url"  : "git://github.com/Util/Perl6-Math-Quaternion.git"
 }
