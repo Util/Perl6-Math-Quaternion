@@ -101,6 +101,7 @@ multi sub  infix:<*>   (  Complex $b, ::?CLASS $a ) is export {           $a.new
 multi sub  infix:<*>   ( ::?CLASS $a, ::?CLASS $b ) is export { $a.cross($b) }
 multi sub  infix:</>   ( ::?CLASS $a,     Real $b ) is export { $a.new: |( $a.coeffs »/» $b ) }
 multi sub  infix:</>   (     Real $b, ::?CLASS $a ) is export { die "p\/q is ambiguous, because it does not specify whether q divides on the left or the right." }
+    # XXX Real / Q *is* well-defined, according to Dr. Bales. Need to test.
 multi sub  infix:</>   ( ::?CLASS $a, ::?CLASS $b ) is export { die "p\/q is ambiguous, because it does not specify whether q divides on the left or the right." }
 multi sub  infix:<⋅>   ( ::?CLASS $a,  Complex $b ) is export { $a.dot($a.new: $b) }
 multi sub  infix:<⋅>   (  Complex $b, ::?CLASS $a ) is export { $a.dot($a.new: $b) }
