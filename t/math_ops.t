@@ -16,7 +16,7 @@ my Math::Quaternion $q1 .= new:  2, 3, 4, 5;
 my Math::Quaternion $q2 .= new:  3, 4, 5, 6;
 my Math::Quaternion $qr .= new: $r, 0, 0, 0;
 
-is   $q.norm,   5.47722557505166,   '.norm';
+is-approx   $q.norm,   5.47722557505166,   '.norm';
 
 is_q $q.conj,   [  1, -2, -3, -4 ], '.conj';
 is_q -$q,       [ -1, -2, -3, -4 ], 'Unary minus';
